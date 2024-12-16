@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    link(rel="stylesheet" href="/css/style.css")
+    title= pageTitle
+  body
+    h1 Return to the homepage
+    a(href="/") Go to Homepage
+    h1= pageTitle
+    form(action="/updates-cobj", method="post")
+      label(for="firstname") First Name:
+      input(type="text", name="firstname", required)
+      br
+      label(for="lastname") Last Name:
+      input(type="text", name="lastname", required)
+      br
+      label(for="email") Email:
+      input(type="text", name="email", required)
+      br
+      button(type="submit") Submit

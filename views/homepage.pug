@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    header
+      h1 Contact Records Explorers
+      p Welcome to the home page!
+
+    a(href="/updates-cobj") Add to this table
+
+    table
+      thead
+        tr
+          th First Name
+          th Last Name
+          th Email
+      tbody
+        each explorer in explorers
+          tr
+            td= explorer.properties.firstname
+            td= explorer.properties.lastname
+            td= explorer.properties.email
