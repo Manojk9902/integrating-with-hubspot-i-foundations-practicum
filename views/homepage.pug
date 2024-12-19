@@ -4,7 +4,7 @@ html
     link(rel="stylesheet" href="/css/style.css")
   body
     header
-      h1 Contact Records Explorers
+      h1 Plants Records Explorers
       p Welcome to the home page!
 
     a(href="/updates-cobj") Add to this table
@@ -12,12 +12,12 @@ html
     table
       thead
         tr
-          th First Name
-          th Last Name
-          th Email
+          th Plant Name
+          th Plant Description
+          th Plant color
       tbody
         each explorer in explorers
           tr
-            td= explorer.properties.firstname
-            td= explorer.properties.lastname
-            td= explorer.properties.email
+            td= explorer.properties.plant_name
+            td= explorer.properties.plant_description
+            td= explorer.properties.plant_color

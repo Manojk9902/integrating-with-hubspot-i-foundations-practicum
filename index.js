@@ -16,7 +16,7 @@ const PRIVATE_APP_ACCESS = process.env.HUBSPOT_ACCESS_TOKEN;
 app.get("/", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://api.hubapi.com/crm/v3/objects/contacts?archived=false&properties=firstname,lastname,email&limit=6",
+      "https://api.hubapi.com/crm/v3/objects/2-38349211?archived=false&properties=plant_name,plant_description,plant_color&limit=6",
       {
         headers: {
           Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
@@ -34,21 +34,32 @@ app.get("/", async (req, res) => {
   }
 });
 
-// TODO: ROUTE 2 - Create a new app.post route for the contacts form to create or update your contacts data. Once executed, redirect the user to the homepage.
+
+// * Code for Route 2 goes heres
+
+app.get("/updates-cobj", (req, res) => {
+  res.render("updates", {
+    pageTitle:
+      "Update Custom Object Form | Integrating With HubSpot I Practicum.",
+  });
+});
+
+// TODO: ROUTE 2 - Create a new app.post route for the custom object form to create or update your custom object data. Once executed, redirect the user to the homepage.
 
 // * Code for Route 3 goes here
 app.post("/updates-cobj", async (req, res) => {
   try {
-    const { firstname, lastname, email } = req.body;
+    const { plant_name, plant_description, plant_color } = req.body;
 
-    // Make a POST request to HubSpot API
+    console.log("Form Data:", { plant_name, plant_description, plant_color });
+
     const response = await axios.post(
-      "https://api.hubapi.com/crm/v3/objects/contacts",
+      "https://api.hubapi.com/crm/v3/objects/2-38349211",
       {
         properties: {
-          firstname,
-          lastname,
-          email,
+          plant_name,
+          plant_description,
+          plant_color,
         },
       },
       {
@@ -58,6 +69,8 @@ app.post("/updates-cobj", async (req, res) => {
         },
       }
     );
+
+    console.log("HubSpot API Response:", response.data);
 
     res.send(
       `Form submitted successfully! <a href="${req.protocol}://${req.get(
@@ -73,13 +86,7 @@ app.post("/updates-cobj", async (req, res) => {
   }
 });
 
-// * Code for Route 2 goes heres
 
-app.get("/updates-cobj", (req, res) => {
-  res.render("updates", {
-    pageTitle: "Update Contact Form | Integrating With HubSpot I Practicum.",
-  });
-});
 
 // * Localhost
 app.listen(3000, () => console.log("Listening on http://localhost:3000"));
